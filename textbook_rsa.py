@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+# Created by Wuli.Zuo a1785343
+# 22/Oct/2019
 
 import time
 import string
@@ -84,6 +85,7 @@ def diff(f1, f2):
         return False
 
 # main
+print('Ex3 for Activity 5\n')
 if __name__ == '__main__':
     alphabet = string.ascii_letters[:26]
     for i in alphabet:

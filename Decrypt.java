@@ -23,13 +23,12 @@ public class Decrypt {
         char[] frq = getFrequencySort(cipher);
         sortFrequency(frq);
 
-        System.out.println(Arrays.toString(letterFrq));
-        System.out.println(Arrays.toString(frq));
-
         // try for the frequency
         String plainText = getPlainMono(cipher, frq);
         System.out.println("\nTry with frequency:");
-        System.out.println(plainText);
+        System.out.println("Alphabet: " + Arrays.toString(letterFrq));
+        System.out.println("Try key:  " + Arrays.toString(frq));
+        System.out.println("\n" + plainText);
 
         // modify the key from observation
         // guess 1: fc=hi, do=to, n=a, ngx=are, qoa=you, tgg=see, 't='s, kfggxt=cheers
@@ -38,7 +37,9 @@ public class Decrypt {
                 'b', 'o', 's', 'e', 'x', 't', 'd', 'a', 'l', 'r', 'm', 'q', 'u'};
         plainText = getPlainMono(cipher, key1);
         System.out.println("\nTry with Guess 1:");
-        System.out.println(plainText);
+        System.out.println("Alphabet: " + Arrays.toString(letterFrq));
+        System.out.println("Try key:  " + Arrays.toString(key1));
+        System.out.println("\n" + plainText);
 
         // guess 2: w-w, grgxqdfcsz=everything, zocsz=going, wg=we, cjgn=idea, hxcsz=bring, fopg=hope, nbckg=alice
         // v-r, n-s, g-z, p-p, w-w, d=j, l-b
@@ -46,7 +47,9 @@ public class Decrypt {
                 's', 'o', 'p', 'e', 'x', 't', 'd', 'a', 'r', 'w', 'm', 'q', 'u'};
         plainText = getPlainMono(cipher, key2);
         System.out.println("\nTry with Guess 2:");
-        System.out.println(plainText);
+        System.out.println("Alphabet: " + Arrays.toString(letterFrq));
+        System.out.println("Try key:  " + Arrays.toString(key2));
+        System.out.println("\n" + plainText);
 
         // guess 3: ixgg=free, ixcjnq=friday, znlgt=games, oi=of, ias=fun, iggb=feel, loxg=more
         // f-i, m-l, l-b
@@ -54,8 +57,10 @@ public class Decrypt {
                 's', 'o', 'p', 'e', 'x', 't', 'd', 'a', 'r', 'w', 'm', 'q', 'u'};
         plainText = getPlainMono(cipher, key3);
         System.out.println("\nTry with Guess 3:");
-        System.out.println(plainText);
-        System.out.println("key: " + Arrays.toString(key3));
+        System.out.println("Alphabet: " + Arrays.toString(letterFrq));
+        System.out.println("Try key:  " + Arrays.toString(key3));
+        System.out.println("\n" + plainText);
+        System.out.println("Found key: " + Arrays.toString(key3));
     }
 
     private static void ex2() {
@@ -155,22 +160,6 @@ public class Decrypt {
         return res;
     }
 
-    private static String reversePoly(String c, String p) {
-        String res = "";
-        for (int i = 0; i < c.length(); i++) {
-            char a = c.charAt(i);
-            char b = p.charAt(i);
-            char k = '0';
-            if (b >= a) {
-                k = (char) (b - a + 97);
-            } else {
-                k = (char) (26 - (a - b) + 97);
-            }
-            res += Character.toString(k);
-        }
-        return res;
-    }
-
     private static void dfs(int deep, int index) {
         if (deep == num) { //get num, print
             String[] keys = fullSort(arr, 0, arr.length);
@@ -205,22 +194,6 @@ public class Decrypt {
         tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
-    }
-
-    private static HashSet<String> genLetters() {
-        HashSet<String> plainTry = new HashSet<String>();
-        String p = "";
-        for (int i = 97; i < 123; i++) {
-            for (int j = 97; j < 123; j++) {
-                for (int k = 97; k < 123; k++) {
-                    p = Character.toString((char)i) + Character.toString((char)j) + Character.toString((char)k);
-                    plainTry.add(p);
-                    // System.out.println(p);
-                    p = "";
-                }
-            }
-        }
-        return plainTry;
     }
 
     private static String readFile(String fileName) {

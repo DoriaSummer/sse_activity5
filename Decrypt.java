@@ -1,3 +1,6 @@
+// Created by Wuli.Zuo a1785343
+// 22/Oct/2019
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -14,6 +17,7 @@ public class Decrypt {
     public static void main(String[] args) {
         ex1();
         ex2();
+
     }
 
     private static void ex1() {
@@ -148,7 +152,12 @@ public class Decrypt {
                 res += as;
             } else {
                 char b = k.charAt(index_k);
-                char p = (char) ((((int) a - 97 + (int) b - 97) % 26) + 97);
+                char p = ' ';
+                if (a>=b) {
+                    p = (char)(((int) a - ((int) b)) + 97);
+                } else {
+                    p = (char)(26-((int) b - ((int) a)) + 97);
+                }
                 res += p;
                 index_k++;
                 if (index_k == k.length()) {
@@ -161,7 +170,7 @@ public class Decrypt {
     }
 
     private static void dfs(int deep, int index) {
-        if (deep == num) { //get num, print
+        if (deep == num) { //get num
             String[] keys = fullSort(arr, 0, arr.length);
             K.addAll(Arrays.asList(keys));
             return;
